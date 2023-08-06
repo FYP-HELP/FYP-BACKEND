@@ -11,16 +11,14 @@ const patientSchema = new Schema({
         enum: ['Male', 'Female', 'Other'],
         required: true
     },
-    contactInfo: {
-        phone: {
-            type: String
-        },
-        email: {
-            type: String
-        },
-        address: {
-            type: String
-        }
+    phone: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    address: {
+        type: String
     },
     disease: {
         type: String,

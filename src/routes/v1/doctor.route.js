@@ -6,13 +6,19 @@ const doctorController = require('../../controllers/doctor.controller');
 
 const router = express.Router();
 
-router
-    .route('/')
-    .post(doctorController.createDoctor)
-    .get(doctorController.getDoctors);
+router.route('/create-doctor')
+    .post(auth(), doctorController.createDoctor);
 
-router
-    .route('/:doctorId')
-    .get(doctorController.getDoctor)
-    .patch(doctorController.updateDoctor)
+router.route('/read-doctor')
+    .post(auth(), doctorController.getDoctor);
+
+router.route('/read-all-doctors')
+    .post(auth(), doctorController.getDoctors);
+
+router.route('/update-doctor')
+    .put(auth(), doctorController.updateDoctor);
+
+router.route('/delete-doctor')
+    .patch(auth(), doctorController.deleteDoctor);
+
 module.exports = router;

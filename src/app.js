@@ -31,6 +31,7 @@ app.use(cors());
 app.options('*', cors());
 app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
+app.use(express.static('dist'));
 
 if (config.env === 'production') {
   app.use('/v1/auth', authLimiter);

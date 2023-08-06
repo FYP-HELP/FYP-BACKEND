@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { doctorService } = require('../services');
 
 const createDoctor = catchAsync(async (req, res) => {
+  console.log(req.body);
   const doctor = await doctorService.createDoctor(req.body);
   res.status(httpStatus.CREATED).send(doctor);
 });

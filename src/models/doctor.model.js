@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 
 // Define Doctor schema
 const doctorSchema = new Schema({
-    name: {
+    username: {
+        type: String,
+        required: true,
+    },
+    email: {
         type: String,
         required: true
     },
@@ -16,17 +20,12 @@ const doctorSchema = new Schema({
         enum: ['Male', 'Female', 'Other'],
         required: true
     },
-    contactInfo: {
-        phone: {
-            type: String
-        },
-        email: {
-            type: String
-        },
-        address: {
-            type: String
-        }
+    phone: {
+        type: String
     },
+    address: {
+        type: String
+    }   ,
     specialty: {
         type: String,
         enum: ['Heart', 'Lung'],

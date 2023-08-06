@@ -2,17 +2,22 @@ const mongoose = require("mongoose");
 const httpStatus = require("http-status");
 const { Doctor } = require("../models");
 const ApiError = require("../utils/ApiError");
+const { userService } = require(".");
 
-const createDoctor = async (req, createBody) => {
+const createDoctor = async (createBody) => {
   const doctorCreated = await Doctor.create(
     createBody
   );
-  return doctorCreated;
+  const role = 'doctor'
+  const { username, email, password } = createBody;
+  const userBody = { name : username, email, password, role }
+  const userCreated = await userService.createUser(userBody);
+  return { doctorCreated, userCreated };
 };
 
 const getAllDoctors = async (filter, options) => {
-    const Doctors = await Doctor.paginate(filter, options);
-    return Doctors;
+  const Doctors = await Doctor.paginate(filter, options);
+  return Doctors;
 };
 
 const getDoctorById = async (lungPatientId) => {
