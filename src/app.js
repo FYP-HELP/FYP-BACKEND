@@ -14,6 +14,9 @@ const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
 
+const multer = require('multer');
+const path = require('path');
+
 const app = express();
 
 if (config.env !== 'test') {
@@ -32,6 +35,17 @@ app.options('*', cors());
 app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
 app.use(express.static('dist'));
+
+// Set up multer to handle file uploads and specify the storage destination
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads'); // Save uploaded files in the 'uploads' folder
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Use unique names for each uploaded file
+  },
+});
+
 
 if (config.env === 'production') {
   app.use('/v1/auth', authLimiter);

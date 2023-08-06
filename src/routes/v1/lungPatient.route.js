@@ -1,13 +1,12 @@
 const express = require('express');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
-const { lungPatientValidation } = require('../../validations');
 const { lungPatientController } = require('../../controllers');
+const upload = require('../../middlewares/multer')
 const router = express.Router();
 
 router.route('/create-lung-patient-data')
-    .post(auth(), lungPatientController.createLungPatient);
-
+    .post(upload.single('image'), lungPatientController.createLungPatient);
 router.route('/read-lung-patient-data')
     .post(auth(), lungPatientController.getLungPatient);
 

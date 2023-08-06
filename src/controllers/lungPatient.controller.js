@@ -5,7 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { lungPatientService } = require('../services');
 
 const createLungPatient = catchAsync(async (req, res) => {
-  const lungPatient = await lungPatientService.createLungPatient(req.body);
+  const lungPatient = await lungPatientService.createLungPatient(req);
   res.status(httpStatus.CREATED).send(lungPatient);
 });
 

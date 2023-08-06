@@ -3,13 +3,15 @@ const httpStatus = require("http-status");
 const { LungPatient } = require("../models");
 const ApiError = require("../utils/ApiError");
 
-const createLungPatient = async (req, createBody) => {
-  createBody.createdBy = req.user.id;
-  const lungPatientCreated = await LungPatient.create(
-    createBody
-  );
-  return lungPatientCreated;
+const createLungPatient = async (req) => {
+
+  // const lungPatientCreated = await LungPatient.create(
+  //   createBody
+  // );
+
+  return req.file;
 };
+
 
 const getAllLungPatients = async (filter, options) => {
     const lungPatients = await LungPatient.paginate(filter, options);
